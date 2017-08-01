@@ -1,0 +1,9 @@
+<h3>Pragmatic Order Received</h3>
+<p>
+  Thank you for your recent order from The Pragmatic Store.
+  You order the following items:
+</p>
+<table>
+  <tr><th colspan="2">Qty</th><th>Description</th><th>Price</th></tr>
+  <%= render @order.line_items %>
+</table>

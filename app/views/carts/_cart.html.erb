@@ -1,0 +1,21 @@
+<h2><%= t('.title') %></h2>
+<table>
+
+  <%= render(cart.line_items) %>
+
+  <tr class="total_line">
+    <td colspan="2">Total</td>
+    <td class="total_cell"><%= currency_to_locale(cart.total_price) %></td>
+  </tr>
+</table>
+<% if session[:order] && current_page?(new_order_path)%>
+<%= button_to  t('.checkout'), new_order_path, method: :get, disabled: true %>
+<% else %>
+<%= button_to  t('.checkout'), new_order_path, method: :get %>
+<% end %>
+<%#= button_to t('.empty'), cart, method: :delete,
+  data: {confirm: 'Are you sure?'}, remote: true %>
+<%- if cart.persisted? %>
+  <%= button_to t('.empty'), cart_path(cart, locale: I18n.locale), method: :delete,
+    data: {confirm: 'Are you sure?'}, remote: true %>
+<% end %>

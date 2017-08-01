@@ -1,0 +1,7 @@
+$('#cart tr').not('.total_line').remove();
+$('#cart').hide('blind', {direction: "vertical"}, 1000);
+//$('#main').html("<p id='notice'><%#=j notice %></p> \
+//                  <h1>Your Pragmatic Catalog</h1> \
+//                  <%#=j render @products %>");
+//the above does not load the css, so failed but interesting solution
+window.location="<%=j store_index_url %>"

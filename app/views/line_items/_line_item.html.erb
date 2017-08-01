@@ -1,0 +1,13 @@
+<% if line_item == @current_item %>
+<tr id="current_item">
+<%else%>
+<tr>
+<%end%>
+  <td><%= line_item.quantity %>&times;</td>
+  <td><%= line_item.product.title %></td>
+  <td class ="item_price"><%= currency_to_locale(line_item.total_price) %></td>
+  <% if @order.nil? %>
+  <td><%= button_to 'V', decrease_line_item_url(line_item, locale: I18n.locale),
+  method: :put, remote: true %>
+  <% end %>
+</tr>

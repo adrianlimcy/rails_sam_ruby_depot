@@ -1,0 +1,66 @@
+<div class="depot_form">
+
+<%= form_with(model: order, local: true) do |form| %>
+  <% if order.errors.any? %>
+    <div id="error_explanation">
+      <!-- <h2><%#= pluralize(order.errors.count, "error") %>
+      prohibited this order from being saved:</h2> -->
+      <h2><%= raw t('errors.template.header', count: order.errors.count,
+      model: t('activerecode.models.order')) %></h2>
+      <p><%= t('errors.template.body') %></p>
+
+      <ul>
+      <% order.errors.full_messages.each do |message| %>
+        <li><%=raw message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <fieldset>
+    <legend><%= t('.legend') %></legend>
+    <div class="field">
+      <%= form.label :name, t('.name') %>
+      <%= form.text_field :name, size: 40 %>
+    </div>
+
+    <div class="field">
+      <%= form.label :address, t('.address_html') %>
+      <%= form.text_area :address, rows: 3, cols: 40 %>
+    </div>
+
+    <div class="field">
+      <%= form.label :email, t('.email') %>
+      <%= form.text_field :email, size: 40 %>
+    </div>
+
+    <div class="field">
+      <%= form.label :pay_type_id, t('.pay_type') %>
+      <%= form.collection_select(:pay_type_id,
+                                  PayType.all, :id, :translated_name,
+                                  prompt: t('.pay_prompt_html')) %>
+
+      <%#= form.select :pay_type_id, pay_type_options,
+                             prompt: t('.pay_prompt_html') %>
+
+
+
+      <%#= form.collection_select(:pay_type_id,
+                                  PayType.all, :id, :name,
+                                  prompt: t('.pay_prompt_html')) %>
+
+      <%#= form.select :pay_type, Order.pay_types.keys,
+                             prompt: 'Select a payment method' %>
+    </div>
+    <!-- only in the edit page -->
+    <% if params[:action] == "edit" %>
+    <div class="field">
+      <%= form.label :ship_date %>
+      <%= form.text_field :ship_date, size: 40, id: "ship_date" %>
+    </div>
+    <% end %>
+    <div class="actions">
+      <%= form.submit t('.submit')%>
+    </div>
+  </fieldset>
+</div>
+<% end %>

@@ -1,0 +1,22 @@
+<%= form_with(model: pay_type, local: true) do |form| %>
+  <% if pay_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(pay_type.errors.count, "error") %> prohibited this pay_type from being saved:</h2>
+
+      <ul>
+      <% pay_type.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :pay_type_name %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,21 @@
+<% cache product do %>
+<% if product == @current_product %>
+<div class="entry" id="current_product">
+<% else %>
+<div class="entry">
+<% end %>
+  <div class="image_link">
+    <%= link_to image_tag(product.image_url),
+    line_items_path(product_id: product, locale: I18n.locale),
+    method: :POST, remote: true %>
+  </div>
+  <h3><%= product.title %></h3>
+  <%= sanitize(product.description) %>
+  <div class="price_line">
+    <span class="price"><%=currency_to_locale(product.price)%></span>
+    <%= button_to t('.add_html'),
+    line_items_path(product_id: product, locale: I18n.locale),
+    remote: true %>
+  </div>
+</div>
+<% end %>
